@@ -1,0 +1,9 @@
+*.o
+*.so
+*.user
+.qmake.stash
+ui_*.h
+moc_*.h
+moc_*.cpp
+Makefile
+/build
