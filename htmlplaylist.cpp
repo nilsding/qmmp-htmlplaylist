@@ -71,7 +71,7 @@ void HTMLPlaylist::exportPlaylistToHTML()
     QTime totalTrackLengthTime = QTime::fromMSecsSinceStartOfDay(totalTrackLengthMsec);
     quint64 totalTrackLengthHours =
         (totalTrackLengthDays * 24) + totalTrackLengthTime.hour(); // days are counted in hours
-    quint64 averageTrackLength = totalTrackLength / trackCount;
+    quint64 averageTrackLength = trackCount == 0 ? 0 : totalTrackLength / trackCount;
     quint64 averageTrackLengthDays = averageTrackLength / 86400000; // 1 day in ms
     quint64 averageTrackLengthMsec = averageTrackLength % 86400000; // 1 day in ms
     QTime averageTrackLengthTime = QTime::fromMSecsSinceStartOfDay(averageTrackLengthMsec);
@@ -112,7 +112,7 @@ void HTMLPlaylist::exportPlaylistToHTML()
     {
         averageTrackLengthFormatted.append(averageTrackLengthTime.toString("m:ss"));
     }
-    html.append(tpl->playlistStatsStart(trackCount + 1, averageTrackLengthFormatted));
+    html.append(tpl->playlistStatsStart(trackCount, averageTrackLengthFormatted));
     // playlist stats: append total track length
     if (totalTrackLengthHours > 0)
     {
